@@ -12,7 +12,8 @@ import {randomWord} from "./words.js"
 class Hangman extends Component {
   /** by default, allow 6 guesses and use provided gallows images. */
   static defaultProps = {
-    images: [img0, img1, img2, img3, img4, img5, img6]
+    images: [img0, img1, img2, img3, img4, img5, img6],
+    maxErrors: 6
   };
 
   constructor(props) {
@@ -74,7 +75,7 @@ class Hangman extends Component {
 
   /** render: render game */
   render() {
-    const gameOver = this.state.nWrong>=this.state.answer.length;
+    const gameOver = this.state.nWrong>=this.props.maxErrors;
     const gameWin = this.guessedWord().indexOf("_")===-1;
     const imageAlt = `${this.state.nWrong} wrong guesses`;
     return (
